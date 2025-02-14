@@ -5,47 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AetherSpace</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        .header { display: flex; align-items: center; padding: 10px; background: #f4f4f4; }
-        .profile-pic { width: 50px; height: 50px; border-radius: 50%; margin-right: 10px; }
-        .chat-window { padding: 20px; height: 400px; overflow-y: auto; border: 1px solid #ccc; }
-        .service-buttons { display: flex; gap: 10px; padding: 20px; }
-        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background: #007bff;
+        }
+        .tabs button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .tabs button:hover {
+            text-decoration: underline;
+        }
+        .content {
+            padding: 20px;
+        }
+        .chat-window {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .service-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
 <body>
+    <!-- Header Section -->
     <div class="header">
         <img src="dr-grace-icon.png" alt="Dr. Grace" class="profile-pic">
         <h2>Dr. Grace</h2>
     </div>
-    <div class="chat-window">
-        <!-- Chat messages will appear here -->
+
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+        <button onclick="switchTab('healthcare')">Healthcare</button>
+        <button onclick="switchTab('emotional-support')">Emotional Support</button>
+        <button onclick="switchTab('storytelling')">Storytelling</button>
+        <button onclick="switchTab('history-book')">History Book</button>
     </div>
-    <div class="service-buttons">
-        <button onclick="remindMedication()">Medication Reminder</button>
-        <button onclick="provideEmotionalSupport()">Emotional Support</button>
-        <button onclick="tellStory()">Storytelling</button>
+
+    <!-- Content Area -->
+    <div id="content" class="content">
+        <!-- Default Tab Content -->
+        <h3>Welcome to AetherSpace</h3>
+        <p>Please select a service from the tabs above.</p>
     </div>
+
+    <!-- JavaScript for Functionality -->
     <script>
-    function displayMessage(message) {
-        const chatWindow = document.querySelector('.chat-window');
-        const messageElement = document.createElement('div');
-        messageElement.textContent = message;
-        chatWindow.appendChild(messageElement);
-        chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to the bottom
-    }
-    
-    function remindMedication() {
-        displayMessage("Dr. Grace: It's time to take your medication!");
-    }
-    
-    function provideEmotionalSupport() {
-        displayMessage("Dr. Grace: How are you feeling today? I'm here to listen.");
-    }
-    
-    function tellStory() {
-        displayMessage("Dr. Grace: Once upon a time, in a small village...");
-    }
-</script>
+        // Function to Switch Tabs
+        function switchTab(tabName) {
+            const content = document.getElementById('content');
+            if (tabName === 'healthcare') {
+                content.innerHTML = `
+                    <h3>Healthcare Services</h3>
+                    <button onclick="remindMedication()">Medication Reminder</button>
+                    <button onclick="provideHealthAdvice()">Health Advice</button>
+                    <div class="chat-window" id="healthcare-chat"></div>
+                `;
+            } else if (tabName === 'emotional-support') {
+                content.innerHTML = `
+                    <h3>Emotional Support</h3>
+                    <button onclick="provideEmotionalSupport()">Talk to Dr. Grace</button>
+                    <div class="chat-window" id="emotional-support-chat"></div>
+                `;
+            } else if (tabName === 'storytelling') {
+                content.innerHTML = `
+                    <h3>Storytelling</h3>
+                    <button onclick="tellStory()">Tell Me a Story</button>
+                    <div class="chat-window" id="storytelling-chat"></div>
+                `;
+            } else if (tabName === 'history-book') {
+                content.innerHTML = `
+                    <h3>History Book</h3>
+                    <button onclick="writeHistory()">Write Your Story</button>
+                    <div class="chat-window" id="history-book-chat"></div>
+                `;
+            }
+        }
+
+        // Healthcare Functions
+        function remindMedication() {
+            displayMessage("Dr. Grace: It's time to take your medication!", "healthcare-chat");
+        }
+        function provideHealthAdvice() {
+            displayMessage("Dr. Grace: Here's some health advice: Stay hydrated and take regular walks.", "healthcare-chat");
+        }
+
+        // Emotional Support Functions
+        function provideEmotionalSupport() {
+            displayMessage("Dr. Grace: How are you feeling today? I'm here to listen.", "emotional-support-chat");
+        }
+
+        // Storytelling Functions
+        function tellStory() {
+            displayMessage("Dr. Grace: Once upon a time, in a small village...", "storytelling-chat");
+        }
+
+        // History Book Functions
+        function writeHistory() {
+            displayMessage("Dr. Grace: Let's write your story! Please share a memory or event.", "history-book-chat");
+        }
+
+        // Helper Function to Display Messages
+        function displayMessage(message, chatId) {
+            const chatWindow = document.getElementById(chatId);
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            chatWindow.appendChild(messageElement);
+            chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to the bottom
+        }
+    </script>
 </body>
 </html>
