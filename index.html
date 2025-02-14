@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AetherSpace</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .header { display: flex; align-items: center; padding: 10px; background: #f4f4f4; }
+        .profile-pic { width: 50px; height: 50px; border-radius: 50%; margin-right: 10px; }
+        .chat-window { padding: 20px; height: 400px; overflow-y: auto; border: 1px solid #ccc; }
+        .service-buttons { display: flex; gap: 10px; padding: 20px; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="dr-grace-icon.png" alt="Dr. Grace" class="profile-pic">
+        <h2>Dr. Grace</h2>
+    </div>
+    <div class="chat-window">
+        <!-- Chat messages will appear here -->
+    </div>
+    <div class="service-buttons">
+        <button onclick="remindMedication()">Medication Reminder</button>
+        <button onclick="provideEmotionalSupport()">Emotional Support</button>
+        <button onclick="tellStory()">Storytelling</button>
+    </div>
+    <script>
+    function displayMessage(message) {
+        const chatWindow = document.querySelector('.chat-window');
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        chatWindow.appendChild(messageElement);
+        chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to the bottom
+    }
+    
+    function remindMedication() {
+        displayMessage("Dr. Grace: It's time to take your medication!");
+    }
+    
+    function provideEmotionalSupport() {
+        displayMessage("Dr. Grace: How are you feeling today? I'm here to listen.");
+    }
+    
+    function tellStory() {
+        displayMessage("Dr. Grace: Once upon a time, in a small village...");
+    }
+</script>
+</body>
+</html>
